@@ -1,3 +1,6 @@
+import AlternateEmailOutlinedIcon from '@mui/icons-material/AlternateEmailOutlined';
+import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import {
   Box,
   Button,
@@ -7,12 +10,7 @@ import {
   OutlinedInput,
   Typography,
 } from "@mui/material";
-import React from "react";
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import AlternateEmailOutlinedIcon from '@mui/icons-material/AlternateEmailOutlined';
-import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
-import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
-import { Bounce, Fade, Slide } from "react-awesome-reveal";
+import { Fade, Slide } from "react-awesome-reveal";
 
 
 

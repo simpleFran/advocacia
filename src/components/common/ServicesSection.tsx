@@ -1,31 +1,30 @@
 import React from "react";
 
 import {
-  DesignServices,
-  Web,
-  Security,
-  LocalOffer,
-  ShoppingCart,
   Build,
   Code,
-  Support,
+  DesignServices,
   Language,
+  LocalOffer,
   Palette,
+  Security,
+  ShoppingCart,
+  Support,
+  Web,
   Work,
 } from "@mui/icons-material";
-import Paper from "@mui/material/Paper";
 import {
   Box,
-  Button,
   CardMedia,
   Grid2,
   IconButton,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
-import { TestimonialSection } from "./TestimonialSection";
-import FlippingButton from "./FlippingButton";
+import Paper from "@mui/material/Paper";
 import { Fade, Slide } from "react-awesome-reveal";
+import FlippingButton from "./FlippingButton";
+import { TestimonialSection } from "./TestimonialSection";
 
 const services = [
   {

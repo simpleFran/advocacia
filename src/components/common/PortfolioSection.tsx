@@ -1,29 +1,27 @@
+import DesignServicesOutlinedIcon from "@mui/icons-material/DesignServicesOutlined";
 import {
   Box,
-  CircularProgress,
   Divider,
   Grid2,
   IconButton,
-  LinearProgress,
   Paper,
-  Typography,
+  Typography
 } from "@mui/material";
 import React from "react";
-import DesignServicesOutlinedIcon from "@mui/icons-material/DesignServicesOutlined";
 
-import { useTheme } from "@mui/material/styles";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 import AppBar from "@mui/material/AppBar";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { useTheme } from "@mui/material/styles";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
 
-import { Brush, Code, TrendingUp, Javascript } from "@mui/icons-material";
-import CircularProgressWithIcon from "./CircularProgressWithIcon";
-import { Bounce, Fade, Roll, Slide, Zoom } from "react-awesome-reveal";
+import { Brush, Code, Javascript, TrendingUp } from "@mui/icons-material";
+import { Fade, Slide, Zoom } from "react-awesome-reveal";
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import CircularProgressWithIcon from "./CircularProgressWithIcon";
 
 const services = [
   {

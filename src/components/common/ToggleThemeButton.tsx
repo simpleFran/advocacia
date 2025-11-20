@@ -1,9 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import { IconButton } from '@mui/material'
-import React from 'react'
-import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import { useColorScheme } from '@mui/material/styles';
+import React from 'react';
 
 export const ToggleThemeButton = () => {
     const { mode, setMode } = useColorScheme();

@@ -1,3 +1,4 @@
+import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 import {
   Box,
   Button,
@@ -6,14 +7,11 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
-import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import CardActionArea from "@mui/material/CardActionArea";
-import FlippingButton from "./FlippingButton";
-import { Bounce, Fade, Slide } from "react-awesome-reveal";
+import { Fade, Slide } from "react-awesome-reveal";
 
 type Team = {
   name: string;
