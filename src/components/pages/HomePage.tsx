@@ -1,5 +1,5 @@
 "use client";
-import { Box, Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import React from "react";
 import { AppNavbar, ContactSection, FeaturesSection, FooterSection, PortfolioSection, ServicesSection, TeamSection, TopSection } from "../common";
 
