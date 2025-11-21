@@ -80,7 +80,7 @@ export default function DrawerAppBar(props: Props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Box sx={{ my: 2 }}>
+      {/* <Box sx={{ my: 2 }}>
         <CardMedia
           sx={{ width: "100%" }}
           component="img"
@@ -88,7 +88,7 @@ export default function DrawerAppBar(props: Props) {
           image={mode === "light" ? "/black_logo.svg" : "/white_logo.svg"}
           alt="logo"
         />
-      </Box>
+      </Box> */}
       <Divider />
       <List>
         {navItems.map((item) => (
@@ -151,14 +151,15 @@ export default function DrawerAppBar(props: Props) {
               <MenuIcon />
             </IconButton>
 
-            <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
-              <CardMedia
+            <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "block" }, fontSize: 32, fontWeight: 'bold' }}>
+              {/* <CardMedia
                 sx={{ width: 300 }}
                 component="img"
                 height="100%"
                 image="/white_logo.svg"
                 alt="logo"
-              />
+              /> */}
+              <span>Escritório Jurídico</span>
             </Box>
 
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
