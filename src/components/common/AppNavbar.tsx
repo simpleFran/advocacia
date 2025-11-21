@@ -19,23 +19,17 @@ import * as React from "react";
 import { ToggleThemeButton } from "./ToggleThemeButton";
 
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window?: () => Window;
   children?: React.ReactElement<{ elevation?: number }>;
 }
 
 function ElevationScroll(props: Props) {
-  const { children, window } = props;
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
+  const { children } = props;
+
+  // 🔧 Correção: removido acesso ao window durante o SSR
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
-    target: window ? window() : undefined,
   });
 
   return children
@@ -47,44 +41,23 @@ function ElevationScroll(props: Props) {
 
 const drawerWidth = 240;
 const navItems = [
-  {
-    title: "Home",
-    url: "/"
-  },
-  {
-    title: "Serviços",
-    url: "#services"
-  },
-  {
-    title: "Casos de Sucesso",
-    url: "#portfolio"
-  },
-  {
-    title: "Funcionalidades",
-    url: "#features"
-  },
-  {
-    title: "Equipe",
-    url: "#team"
-  },
-  {
-    title: "Contato",
-    url: "#contact"
-  }
-  
+  { title: "Home", url: "/" },
+  { title: "Serviços", url: "#services" },
+  { title: "Casos de Sucesso", url: "#portfolio" },
+  { title: "Funcionalidades", url: "#features" },
+  { title: "Equipe", url: "#team" },
+  { title: "Contato", url: "#contact" },
 ];
 
 export default function DrawerAppBar(props: Props) {
-
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const { mode, setMode } = useColorScheme();
 
-  const pathname = usePathname()
+  const pathname = usePathname();
   const [hash, setHash] = React.useState("/");
 
-
-  console.log(pathname, hash)
+  console.log(pathname, hash);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -92,20 +65,18 @@ export default function DrawerAppBar(props: Props) {
 
   React.useEffect(() => {
     const handleHashChange = () => {
-      console.log("Hash value ", window.location.hash)
-      const val = window.location.hash
-      setHash(!val ? "/" : val); // Extract the hash part
+      console.log("Hash value ", window.location.hash);
+      const val = window.location.hash;
+      setHash(!val ? "/" : val);
     };
 
-    handleHashChange(); // Set initial hash
-    // window.addEventListener("hashchange", handleHashChange); // Listen for hash changes
-    window.addEventListener("scroll", handleHashChange); // Listen for hash changes
-    return () => {
-      window.removeEventListener("scroll", handleHashChange); // Cleanup
+    handleHashChange();
+    window.addEventListener("scroll", handleHashChange);
 
+    return () => {
+      window.removeEventListener("scroll", handleHashChange);
     };
   }, []);
-  
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -122,12 +93,20 @@ export default function DrawerAppBar(props: Props) {
       <List>
         {navItems.map((item) => (
           <ListItem key={item.title} disablePadding>
-            <ListItemButton 
+            <ListItemButton
               LinkComponent={Link}
-              href={item.url} 
-              sx={[(theme) => ({ 
-                ...((item.url === hash) ? { color: theme.vars.palette.warning.light, borderBottom: `2px solid ${theme.vars.palette.warning.light}` } : {}) 
-              })]}>
+              href={item.url}
+              sx={[
+                (theme) => ({
+                  ...(item.url === hash
+                    ? {
+                        color: theme.vars.palette.warning.light,
+                        borderBottom: `2px solid ${theme.vars.palette.warning.light}`,
+                      }
+                    : {}),
+                }),
+              ]}
+            >
               <ListItemText primary={item.title} />
             </ListItemButton>
           </ListItem>
@@ -140,17 +119,16 @@ export default function DrawerAppBar(props: Props) {
 
   React.useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window?.scrollY > 50); // Change when scrolling past 50px
+      setIsScrolled(window?.scrollY > 50);
     };
 
     window?.addEventListener("scroll", handleScroll);
     return () => window?.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // const { window } = props;
-
-  const container =
-    window !== undefined ? () => window?.document.body : undefined;
+  // 🔧 Correção SSR-safe
+  const isClient = typeof window !== "undefined";
+  const container = isClient ? () => window.document.body : undefined;
 
   return (
     <Box>
@@ -160,7 +138,6 @@ export default function DrawerAppBar(props: Props) {
             backgroundColor: isScrolled ? "primary.main" : "transparent",
             boxShadow: isScrolled ? 2 : "none",
             transition: "0.3s ease-in-out",
-            
           }}
         >
           <Toolbar>
@@ -173,6 +150,7 @@ export default function DrawerAppBar(props: Props) {
             >
               <MenuIcon />
             </IconButton>
+
             <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
               <CardMedia
                 sx={{ width: 300 }}
@@ -182,6 +160,7 @@ export default function DrawerAppBar(props: Props) {
                 alt="logo"
               />
             </Box>
+
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {navItems.map((item) => (
                 <Button
@@ -191,13 +170,19 @@ export default function DrawerAppBar(props: Props) {
                   disableRipple
                   disableFocusRipple
                   disableTouchRipple
-                  sx={[(theme) => ({ 
-                    // color: "#fff", 
-                    fontWeight: 800, 
-                    fontSize: "1.2rem",
-                    borderRadius: 0,
-                    ...((item.url === hash) ? { color: theme.vars.palette.warning.light, borderBottom: `2px solid ${theme.vars.palette.warning.light}` } : {}) 
-                  })]}
+                  sx={[
+                    (theme) => ({
+                      fontWeight: 800,
+                      fontSize: "1.2rem",
+                      borderRadius: 0,
+                      ...(item.url === hash
+                        ? {
+                            color: theme.vars.palette.warning.light,
+                            borderBottom: `2px solid ${theme.vars.palette.warning.light}`,
+                          }
+                        : {}),
+                    }),
+                  ]}
                   LinkComponent={Link}
                   href={item.url}
                 >
@@ -205,10 +190,12 @@ export default function DrawerAppBar(props: Props) {
                 </Button>
               ))}
             </Box>
+
             <ToggleThemeButton />
           </Toolbar>
         </AppBar>
       </ElevationScroll>
+
       <nav>
         <Drawer
           container={container}
@@ -216,7 +203,7 @@ export default function DrawerAppBar(props: Props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },
